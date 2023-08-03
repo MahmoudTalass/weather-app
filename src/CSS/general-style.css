@@ -1,0 +1,88 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ece6e6;
+    padding: 1rem;
+}
+
+
+/* Weather report container style */
+.weather-container {
+    background-color: #fff;
+    width: clamp(500px, 50%, 800px);
+    padding: 3rem;
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+/* Weather forcast of current day styles */
+.today-forcast-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.weather-condition {
+    font-size: 2.5rem;
+}
+
+.temp-container {
+    display: flex;
+    gap: .3rem;
+    font-size: 2.5rem;
+}
+
+.other-info-container {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.other-info {
+    display: flex;
+    gap: .3rem;
+}
+
+
+/* Future forcast styles */
+.future-forcast-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.future-forcast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #ece6e6;
+    padding: .8rem 1.7rem;
+    max-height: fit-content;
+}
+
+
+@media only screen and (max-width: 410px) {
+    .today-forcast-container {
+        justify-content: center;
+    }
+
+    .future-forcast-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
