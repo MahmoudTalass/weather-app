@@ -8,36 +8,50 @@
   </head>
   <body>
     <main class="root" id="root">
-      <section class="weather-container">
-        <div class="today-forcast-container">
-          <div class="main-info">
-            <p class="weather-condition" id="weather-condition">Rainy</p>
-            <div class="temp-container">
-              <p class="temp" id="temp">38°</p>
-              <p class="temp-scale" id="temp-scale">C</p>
-            </div>
+      <section class="all-info-container">
+        <section class="location-date-time-info">
+          <div class="location-info">
+            <p class="city" id="city">Greenbelt</p>
+            <span>,</span>
+            <p class="country" id="country">USA</p>
           </div>
-          <div class="other-info-container">
-            <div class="temp-feel-container other-info">
-                <p class="temp-feel-text" >Feels like:</p>
-                <p class="temp-feel" id="temp-feel">5°</p>
+          <div class="date-time-info">
+            <p class="day" id="day">Thursday</p>
+            <p class="date" id="date">08/03/2023</p>
+            <p class="time" id="time">6:23 PM</p>
+          </div>
+        </section>
+        <section class="weather-info">
+          <div class="today-forecast-container">
+            <div class="main-info">
+              <p class="weather-condition" id="weather-condition">Rainy</p>
+              <div class="temp-container">
+                <p class="temp" id="temp">38°</p>
+                <p class="temp-scale" id="temp-scale">C</p>
+              </div>
             </div>
-            <div class="air-quality-container other-info">
+            <div class="other-info-container">
+              <div class="temp-feel-container other-info">
+                <p class="temp-feel-text">Feels like:</p>
+                <p class="temp-feel" id="temp-feel">5°</p>
+              </div>
+              <div class="air-quality-container other-info">
                 <p class="air-quality-text">Air quality:</p>
                 <p class="air-quality" id="air-quality">38°</p>
-            </div>
-            <div class="humidity-container other-info">
+              </div>
+              <div class="humidity-container other-info">
                 <p class="humidity-text">Humidity:</p>
                 <p class="humidity" id="humidity">20%</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="future-forcast-container">
-            <div class="future-forcast-item">
-                <p>8/19</p>
-                <p>38°</p>
+          <div class="future-forecast-container">
+            <div class="future-forecast-item">
+              <p>8/19</p>
+              <p>38°</p>
             </div>
-        </div>
+          </div>
+        </section>
       </section>
     </main>
   </body>
