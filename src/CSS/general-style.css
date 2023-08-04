@@ -18,6 +18,13 @@
   gap: 2rem;
 }
 
+/* Location search bar */
+.location-search {
+  border: none;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.5rem;
+}
+
 /* Location, date, and time info container styles */
 .location-date-time-info {
   display: flex;
