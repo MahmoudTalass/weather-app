@@ -8,11 +8,22 @@ async function getForecastInfo(city = "New York") {
   return forecastJson;
 }
 
-async function getCity(city) {
-  const cityData = await getForecastInfo(city);
-  const cityName = cityData.location.name;
+async function getLocation(city) {
+  try {
+    const data = await getForecastInfo(city);
+    const locationData = data.location;
+    const cityName = locationData.name;
+    const stateName = locationData.region || "";
+    const countryName = locationData.country;
 
-  return cityName;
+    return {
+      cityName,
+      stateName,
+      countryName,
+    };
+  } catch (err) {
+    return "Location was not found";
+  }
 }
 
 function getDate() {
@@ -44,4 +55,4 @@ function getTime() {
   return `${time}`;
 }
 
-export { getForecastInfo, getTime, getDate, getDayName, getCity };
+export { getForecastInfo, getTime, getDate, getDayName, getLocation };
