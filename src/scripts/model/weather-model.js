@@ -10,11 +10,9 @@ async function getForecastInfo(city="New York") {
 
 function getDate() {
   const currentDate = new Date();
-  const month = currentDate.getMonth() + 1;
-  const day = currentDate.getDay();
-  const year = currentDate.getFullYear();
+    const date = currentDate.toLocaleDateString()
 
-  return `${month}/${day}/${year}`;
+  return `${date}`;
 }
 
 function getDayName() {
