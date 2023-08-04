@@ -17,3 +17,8 @@ function displayCity(city) {
     const cityContainer = document.querySelector("#city")
     cityContainer.textContent = city;
 }
+
+function displayState(state) {
+    const stateContainer = document.querySelector("#state");
+    stateContainer.textContent = state;
+}
