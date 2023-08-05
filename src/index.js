@@ -17,7 +17,7 @@ import { updateTime, updateDate } from "./scripts/controller/weather-controller"
 updateTime();
 setInterval(() => {
   updateTime();
-}, 20000);
+}, 500);
 
 setInterval(() => {
   updateDate();
