@@ -4,11 +4,11 @@ import { displayDate, displayTime } from "../view/weather-view";
 function updateTime() {
   const time = getTime();
   time.then((result) => displayTime(result));
-  console.log("time updated")
 }
 
 function updateDate() {
-    displayDate(getDate())
+    const date = getDate();
+    date.then((result) => displayDate(result));
 }
 
 export { updateTime, updateDate };
