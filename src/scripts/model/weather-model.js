@@ -32,14 +32,19 @@ async function getLocation(city) {
   }
 }
 
-async function getDate(city) {
+async function getTimeZone(city) {
   const today = new Date();
   const locationData = await getLocationData(city);
-  const timezone = today.toLocaleString("en-US", {
+  const timeZone = today.toLocaleString("en-US", {
     timeZone: locationData.tz_id,
   });
 
-  const date = timezone.substring(0, 8);
+  return timeZone;
+}
+
+async function getDate(city) {
+  const timeZone = getTimeZone(city);
+  const date = timeZone.substring(0, 8);
 
   return date;
 }
@@ -60,12 +65,8 @@ function getDayName() {
 }
 
 async function getTime(city) {
-  const today = new Date();
-  const locationData = await getLocationData(city);
-  const timezone = today.toLocaleString("en-US", {
-    timeZone: locationData.tz_id,
-  });
-  const time = timezone.substring(10);
+  const timeZone = getTimeZone(city)
+  const time = timeZone.substring(10);
 
   return `${time}`;
 }
