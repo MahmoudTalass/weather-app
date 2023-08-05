@@ -22,3 +22,5 @@ function displayState(state) {
     const stateContainer = document.querySelector("#state");
     stateContainer.textContent = state;
 }
+
+export {displayTime, displayDate, displayDay}
