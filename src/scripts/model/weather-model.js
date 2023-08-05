@@ -79,12 +79,12 @@ function convertToStandardTime(militaryTime) {
 }
 
 async function getTime(city) {
+    const today = new Date()
   const locationData = await getLocationData(city);
-  console.log(locationData)
-  const time = locationData.localtime.substring(11);
-  const standardTime = convertToStandardTime(time);
-  console.log(standardTime);
-  return `${standardTime}`;
+  const timezone = today.toLocaleString("en-US", {timeZone: locationData.tz_id})
+  const time = timezone.substring(10)
+  
+  return `${time}`;
 }
 
 export { getForecastInfo, getTime, getDate, getDayName, getLocation };
