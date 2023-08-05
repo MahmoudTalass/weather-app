@@ -43,29 +43,20 @@ async function getTimeZone(city) {
 }
 
 async function getDate(city) {
-  const timeZone = getTimeZone(city);
+  const timeZone = await getTimeZone(city);
   const date = timeZone.substring(0, 8);
 
   return date;
 }
 
-function getDayName() {
-  const currentDate = new Date();
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  return days[currentDate.getDay()];
+async function getDayName(city) {
+  const date =  new Date(await getDate(city));
+  const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+  return dayName;
 }
 
 async function getTime(city) {
-  const timeZone = getTimeZone(city)
+  const timeZone = await getTimeZone(city);
   const time = timeZone.substring(10);
 
   return `${time}`;
