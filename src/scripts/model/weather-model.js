@@ -32,11 +32,16 @@ async function getLocation(city) {
   }
 }
 
-function getDate() {
-  const currentDate = new Date();
-  const date = currentDate.toLocaleDateString();
+async function getDate(city) {
+  const today = new Date();
+  const locationData = await getLocationData(city);
+  const timezone = today.toLocaleString("en-US", {
+    timeZone: locationData.tz_id,
+  });
 
-  return `${date}`;
+  const date = timezone.substring(0, 8)
+
+  return date;
 }
 
 function getDayName() {
@@ -79,11 +84,13 @@ function convertToStandardTime(militaryTime) {
 }
 
 async function getTime(city) {
-    const today = new Date()
+  const today = new Date();
   const locationData = await getLocationData(city);
-  const timezone = today.toLocaleString("en-US", {timeZone: locationData.tz_id})
-  const time = timezone.substring(10)
-  
+  const timezone = today.toLocaleString("en-US", {
+    timeZone: locationData.tz_id,
+  });
+  const time = timezone.substring(10);
+
   return `${time}`;
 }
 
