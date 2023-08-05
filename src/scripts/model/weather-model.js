@@ -8,10 +8,16 @@ async function getForecastInfo(city = "New York") {
   return forecastJson;
 }
 
+async function getLocationData(city) {
+  const data = await getForecastInfo(city);
+  const locationData = await data.location;
+
+  return locationData;
+}
+
 async function getLocation(city) {
   try {
-    const data = await getForecastInfo(city);
-    const locationData = data.location;
+    const locationData = getLocationData(city);
     const cityName = locationData.name;
     const stateName = locationData.region || "";
     const countryName = locationData.country;
@@ -48,10 +54,11 @@ function getDayName() {
   return days[currentDate.getDay()];
 }
 
-function getTime() {
-  const currentDate = new Date();
-  const time = currentDate.toLocaleTimeString();
-
+async function getTime(city) {
+  debugger;
+  const locationData = await getLocationData(city);
+  console.log(locationData.localtime)
+  const time = locationData;
   return `${time}`;
 }
 
