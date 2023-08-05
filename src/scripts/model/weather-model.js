@@ -54,12 +54,37 @@ function getDayName() {
   return days[currentDate.getDay()];
 }
 
+function convertToStandardTime(militaryTime) {
+  const time = militaryTime.split(":"); // convert to array
+
+  // fetch
+  const hours = Number(time[0]);
+  const minutes = Number(time[1]);
+
+  // calculate
+  let timeValue;
+
+  if (hours > 0 && hours <= 12) {
+    timeValue = `${hours}`;
+  } else if (hours > 12) {
+    timeValue = `${hours - 12}`;
+  } else if (hours === 0) {
+    timeValue = "12";
+  }
+
+  timeValue += minutes < 10 ? `:0${minutes}` : `:${minutes}`; // get minutes
+  timeValue += hours >= 12 ? " P.M." : " A.M."; // get AM/PM
+
+  return timeValue;
+}
+
 async function getTime(city) {
-  debugger;
   const locationData = await getLocationData(city);
-  console.log(locationData.localtime)
-  const time = locationData;
-  return `${time}`;
+  console.log(locationData)
+  const time = locationData.localtime.substring(11);
+  const standardTime = convertToStandardTime(time);
+  console.log(standardTime);
+  return `${standardTime}`;
 }
 
 export { getForecastInfo, getTime, getDate, getDayName, getLocation };
