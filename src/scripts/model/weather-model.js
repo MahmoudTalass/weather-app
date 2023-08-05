@@ -9,6 +9,7 @@ async function getForecastInfo(city = "New York") {
 }
 
 async function getLocationData(city) {
+  // wait because getForecastInfo() is an async operation
   const data = await getForecastInfo(city);
   const locationData = await data.location;
 
@@ -34,6 +35,8 @@ async function getLocation(city) {
 
 async function getTimeZone(city) {
   const today = new Date();
+
+  // wait because getLocationData() contains async operations
   const locationData = await getLocationData(city);
   const timeZone = today.toLocaleString("en-US", {
     timeZone: locationData.tz_id,
@@ -43,6 +46,7 @@ async function getTimeZone(city) {
 }
 
 async function getDate(city) {
+  // wait because getTimeZone() contains async operations
   const timeZone = await getTimeZone(city);
   const date = timeZone.substring(0, 8);
 
@@ -50,12 +54,14 @@ async function getDate(city) {
 }
 
 async function getDayName(city) {
-  const date =  new Date(await getDate(city));
+  // wait because getDate() contains async operations
+  const date = new Date(await getDate(city));
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
   return dayName;
 }
 
 async function getTime(city) {
+  // wait because getTimeZone() contains async operations
   const timeZone = await getTimeZone(city);
   const time = timeZone.substring(10);
 
