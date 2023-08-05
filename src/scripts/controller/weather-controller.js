@@ -1,5 +1,5 @@
-import { getTime } from "../model/weather-model";
-import { displayTime } from "../view/weather-view";
+import { getDate, getTime } from "../model/weather-model";
+import { displayDate, displayTime } from "../view/weather-view";
 
 function updateTime() {
   const time = getTime();
@@ -7,4 +7,8 @@ function updateTime() {
   console.log("time updated")
 }
 
-export { updateTime };
+function updateDate() {
+    displayDate(getDate())
+}
+
+export { updateTime, updateDate };
