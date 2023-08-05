@@ -1,3 +1,24 @@
 /* eslint-disable no-unused-vars */
-import reset from "./CSS/reset.css"
-import generalStyle from "./CSS/general-style.css"
+import reset from "./CSS/reset.css";
+import generalStyle from "./CSS/general-style.css";
+
+import {
+  getForecastInfo,
+  getDate,
+  getDayName,
+  getTime,
+  getLocation,
+} from "./scripts/model/weather-model";
+import { updateTime, updateDate } from "./scripts/controller/weather-controller";
+
+// console.log(getForecastInfo())
+// console.log(getDayName(), getDate())
+// console.log(getLocation())
+updateTime();
+setInterval(() => {
+  updateTime();
+}, 20000);
+
+setInterval(() => {
+  updateDate();
+}, 1000)
