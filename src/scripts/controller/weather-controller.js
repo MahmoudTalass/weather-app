@@ -1,4 +1,5 @@
 import {
+  getCurrentTemp,
   getDate,
   getDayName,
   getLocation,
@@ -11,6 +12,7 @@ import {
   displayCity,
   displayRegion,
   displayCountry,
+  displayCurrentTemp,
 } from "../view/weather-view";
 
 function updateTime() {
@@ -30,20 +32,33 @@ function updateDay() {
 
 function updateCity() {
   getLocation().then((result) => {
-    displayCity(result.cityName);
+    displayCity(result.city);
   });
 }
 
 function updateRegion() {
-    getLocation().then((result) => {
-        displayRegion(result.regionName)
-    })
+  getLocation().then((result) => {
+    displayRegion(result.regionN);
+  });
 }
 
 function updateCountry() {
-    getLocation().then(result => {
-        displayCountry(result.countryName)
-    })
+  getLocation().then((result) => {
+    displayCountry(result.countryN);
+  });
 }
 
-export { updateTime, updateDate, updateDay, updateCity, updateRegion, updateCountry };
+function updateCurrentTemp() {
+  const currentTemp = getCurrentTemp();
+  currentTemp.then((result) => displayCurrentTemp(result));
+}
+
+export {
+  updateTime,
+  updateDate,
+  updateDay,
+  updateCity,
+  updateRegion,
+  updateCountry,
+  updateCurrentTemp,
+};
