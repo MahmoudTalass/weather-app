@@ -9,6 +9,8 @@ import {
   displayTime,
   displayDay,
   displayCity,
+  displayRegion,
+  displayCountry,
 } from "../view/weather-view";
 
 function updateTime() {
@@ -32,4 +34,16 @@ function updateCity() {
   });
 }
 
-export { updateTime, updateDate, updateDay, updateCity };
+function updateRegion() {
+    getLocation().then((result) => {
+        displayRegion(result.regionName)
+    })
+}
+
+function updateCountry() {
+    getLocation().then(result => {
+        displayCountry(result.countryName)
+    })
+}
+
+export { updateTime, updateDate, updateDay, updateCity, updateRegion, updateCountry };
