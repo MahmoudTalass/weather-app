@@ -15,19 +15,31 @@ function displayDate(date) {
 }
 
 function displayCity(city) {
-    const cityContainer = document.querySelector("#city")
-    cityContainer.textContent = city;
+  const cityContainer = document.querySelector("#city");
+  cityContainer.textContent = city;
 }
 
 function displayRegion(region) {
-    const regionContainer = document.querySelector("#region");
-    regionContainer.textContent = region;
+  const regionContainer = document.querySelector("#region");
+  regionContainer.textContent = region;
 }
 
 function displayCountry(country) {
-    const countryContainer = document.querySelector("#country")
-    countryContainer.textContent = country
+  const countryContainer = document.querySelector("#country");
+  countryContainer.textContent = country;
 }
 
+function displayCurrentTemp(temp) {
+  const currentTempContainer = document.querySelector("#current-temp");
+  currentTempContainer.textContent = temp;
+}
 
-export {displayTime, displayDate, displayDay, displayCity, displayCountry, displayRegion}
+export {
+  displayTime,
+  displayDate,
+  displayDay,
+  displayCity,
+  displayCountry,
+  displayRegion,
+  displayCurrentTemp,
+};
