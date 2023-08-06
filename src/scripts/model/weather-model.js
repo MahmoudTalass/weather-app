@@ -1,43 +1,44 @@
 const KEY = "2b31c3c95d8f4664beb190158233107";
+let isCelsius = false;
 
-async function getForecastInfo(city = "India") {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${city}`;
+async function getForecastInfo(location = "Greenbelt") {
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}`;
   const data = await fetch(url, { mode: "cors" });
   const forecastJson = await data.json();
 
   return forecastJson;
 }
 
-async function getLocationData(city) {
+async function getLocationData(location) {
   // wait because getForecastInfo() is an async operation
-  const data = await getForecastInfo(city);
+  const data = await getForecastInfo(location);
   const locationData = await data.location;
   return locationData;
 }
 
-async function getLocation(city) {
+async function getLocation(location) {
   try {
     // wait because getLocationData() contains async operation
-    const locationData = await getLocationData(city);
-    const cityName = locationData.name;
-    const regionName = locationData.region;
-    const countryName = locationData.country;
+    const locationData = await getLocationData(location);
+    const city = locationData.name;
+    const regionN = locationData.region;
+    const countryN = locationData.country;
 
     return {
-      cityName,
-      regionName,
-      countryName,
+      city,
+      regionN,
+      countryN,
     };
   } catch (err) {
     return "Location was not found";
   }
 }
 
-async function getTimeZone(city) {
+async function getTimeZone(location) {
   const today = new Date();
 
   // wait because getLocationData() contains async operations
-  const locationData = await getLocationData(city);
+  const locationData = await getLocationData(location);
   const timeZone = today.toLocaleString("en-US", {
     timeZone: locationData.tz_id,
   });
@@ -45,27 +46,53 @@ async function getTimeZone(city) {
   return timeZone;
 }
 
-async function getDate(city) {
+async function getDate(location) {
   // wait because getTimeZone() contains async operations
-  const timeZone = await getTimeZone(city);
+  const timeZone = await getTimeZone(location);
   const date = timeZone.substring(0, 8);
 
   return date;
 }
 
-async function getDayName(city) {
+async function getDayName(location) {
   // wait because getDate() contains async operations
-  const date = new Date(await getDate(city));
+  const date = new Date(await getDate(location));
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
   return dayName;
 }
 
-async function getTime(city) {
+async function getTime(location) {
   // wait because getTimeZone() contains async operations
-  const timeZone = await getTimeZone(city);
+  const timeZone = await getTimeZone(location);
   const time = timeZone.substring(10);
 
   return `${time}`;
 }
 
-export { getForecastInfo, getTime, getDate, getDayName, getLocation };
+async function getCurrentWeather(location) {
+  const weatherInfo = await getForecastInfo(location);
+  console.log(weatherInfo.current);
+  return weatherInfo.current;
+}
+
+async function getCurrentTemp(location) {
+  const weatherInfo = await getCurrentWeather(location);
+  const tempF = weatherInfo.temp_f;
+  const tempC = weatherInfo.temp_c
+
+  return isCelsius ? tempC : tempF;
+}
+
+async function changeTempScale() {
+    isCelsius = !isCelsius;
+}
+
+export {
+  getForecastInfo,
+  getTime,
+  getDate,
+  getDayName,
+  getLocation,
+  getCurrentTemp,
+  changeTempScale
+};
