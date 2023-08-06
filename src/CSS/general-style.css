@@ -47,6 +47,10 @@
   outline: none;
 }
 
+.search-btn:active {
+  background-color: #aaa;
+}
+
 /* Location, date, and time info container styles */
 .location-date-time-info {
   display: flex;
