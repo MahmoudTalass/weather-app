@@ -78,13 +78,13 @@ async function getCurrentWeather(location) {
 async function getCurrentTemp(location) {
   const weatherInfo = await getCurrentWeather(location);
   const tempF = weatherInfo.temp_f;
-  const tempC = weatherInfo.temp_c
+  const tempC = weatherInfo.temp_c;
 
   return isCelsius ? tempC : tempF;
 }
 
 async function changeTempScale() {
-    isCelsius = !isCelsius;
+  isCelsius = !isCelsius;
 }
 
 export {
@@ -94,5 +94,5 @@ export {
   getDayName,
   getLocation,
   getCurrentTemp,
-  changeTempScale
+  changeTempScale,
 };
