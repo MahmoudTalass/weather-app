@@ -1,6 +1,6 @@
 const KEY = "2b31c3c95d8f4664beb190158233107";
 
-async function getForecastInfo(city = "New York") {
+async function getForecastInfo(city = "India") {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${city}`;
   const data = await fetch(url, { mode: "cors" });
   const forecastJson = await data.json();
@@ -12,20 +12,20 @@ async function getLocationData(city) {
   // wait because getForecastInfo() is an async operation
   const data = await getForecastInfo(city);
   const locationData = await data.location;
-
   return locationData;
 }
 
 async function getLocation(city) {
   try {
-    const locationData = getLocationData(city);
+    // wait because getLocationData() contains async operation
+    const locationData = await getLocationData(city);
     const cityName = locationData.name;
-    const stateName = locationData.region || "";
+    const regionName = locationData.region;
     const countryName = locationData.country;
 
     return {
       cityName,
-      stateName,
+      regionName,
       countryName,
     };
   } catch (err) {
