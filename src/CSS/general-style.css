@@ -24,10 +24,27 @@
 }
 
 /* Location search bar */
-.location-search {
+.location-search-container {
+  display: flex;
+  width: 100%;
+}
+
+.search-btn {
   border: none;
-  border-bottom: 1px solid #aaa;
-  padding-bottom: 0.5rem;
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  padding: .5rem;
+  background-color: #ece6e6;
+}
+
+.location-search {
+  border: 1px solid #ece6e6;
+  border-left: none;
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  flex: 1;
+  padding-left: .3rem;
+  outline: none;
 }
 
 /* Location, date, and time info container styles */
