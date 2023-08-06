@@ -19,9 +19,16 @@ function displayCity(city) {
     cityContainer.textContent = city;
 }
 
-function displayState(state) {
-    const stateContainer = document.querySelector("#state");
-    stateContainer.textContent = state;
+function displayRegion(region) {
+    const regionContainer = document.querySelector("#region");
+    regionContainer.textContent = region;
 }
+
+function displayCountry(country) {
+    const countryContainer = document.querySelector("#country")
+    countryContainer.textContent = country
+}
+
+function
 
 export {displayTime, displayDate, displayDay}
