@@ -31,7 +31,7 @@ function displayCountry(country) {
 
 function displayCurrentTemp(temp) {
   const currentTempContainer = document.querySelector("#current-temp");
-  currentTempContainer.textContent = temp;
+  currentTempContainer.textContent = `${temp}°`;
 }
 
 export {
