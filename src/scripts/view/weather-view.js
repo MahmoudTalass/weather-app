@@ -29,6 +29,5 @@ function displayCountry(country) {
     countryContainer.textContent = country
 }
 
-function
 
-export {displayTime, displayDate, displayDay}
+export {displayTime, displayDate, displayDay, displayCity, displayCountry, displayRegion}
