@@ -31,19 +31,19 @@
 
 .search-btn {
   border: none;
-  border-top-left-radius: .5rem;
-  border-bottom-left-radius: .5rem;
-  padding: .5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0.5rem;
   background-color: #ece6e6;
 }
 
 .location-search {
   border: 1px solid #ece6e6;
   border-left: none;
-  border-top-right-radius: .5rem;
-  border-bottom-right-radius: .5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   flex: 1;
-  padding-left: .3rem;
+  padding-left: 0.3rem;
   outline: none;
 }
 
@@ -53,16 +53,18 @@
 
 /* Location, date, and time info container styles */
 .location-date-time-info {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .location-info {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  justify-self: start;
 }
 
 .location-info > span {
@@ -70,6 +72,7 @@
 }
 
 .date-time-info {
+  justify-self: end;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -147,9 +150,19 @@
   }
 
   .location-date-time-info {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     align-items: center;
     gap: 1rem;
+  }
+
+  .location-info {
+    align-items: center;
+    justify-self: center;
+  }
+
+  .date-time-info {
+    justify-self: center;
   }
 
   .today-forecast-container {
