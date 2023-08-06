@@ -9,7 +9,7 @@ import {
   getTime,
   getLocation,
 } from "./scripts/model/weather-model";
-import { updateTime, updateDate } from "./scripts/controller/weather-controller";
+import { updateTime, updateDate, updateDay, updateCity, updateRegion, updateCountry } from "./scripts/controller/weather-controller";
 
 // console.log(getForecastInfo())
 // console.log(getDayName(), getDate())
@@ -22,3 +22,8 @@ setInterval(() => {
 setInterval(() => {
   updateDate();
 }, 1000)
+
+updateDay()
+updateCity()
+updateRegion()
+updateCountry()
