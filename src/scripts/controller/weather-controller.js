@@ -1,8 +1,10 @@
 import {
+  changeTempScale,
   getCurrentTemp,
   getDate,
   getDayName,
   getLocation,
+  getTempScale,
   getTime,
 } from "../model/weather-model";
 import {
@@ -13,6 +15,8 @@ import {
   displayRegion,
   displayCountry,
   displayCurrentTemp,
+  displayTempScale,
+  getDisplayedTemp,
 } from "../view/weather-view";
 
 function updateTime() {
@@ -53,6 +57,42 @@ function updateCurrentTemp() {
   currentTemp.then((result) => displayCurrentTemp(result));
 }
 
+function convertToCelsius(temp) {
+  const celsiusTemp = (Number(temp) * 9) / 5 + 32;
+  return celsiusTemp;
+}
+
+function convertToFahrenheit(temp) {
+  const fahrenheitTemp = ((Number(temp) - 32) * 5) / 9;
+  return fahrenheitTemp;
+}
+
+function showTempScale() {
+  const currentScale = getTempScale();
+  if (currentScale) {
+    displayTempScale("C");
+  } else {
+    displayTempScale("F");
+  }
+}
+
+function updateTempWithNewScale() {
+  const currentScale = getTempScale();
+  const currentTemp = getDisplayedTemp();
+  let updatedScaleTemp;
+  if (currentScale) {
+    updatedScaleTemp = convertToFahrenheit(currentTemp);
+  } else {
+    updatedScaleTemp = convertToCelsius(currentTemp);
+  }
+  displayCurrentTemp(updatedScaleTemp);
+}
+
+function updateTempScale() {
+  changeTempScale();
+  showTempScale();
+}
+
 export {
   updateTime,
   updateDate,
@@ -61,4 +101,7 @@ export {
   updateRegion,
   updateCountry,
   updateCurrentTemp,
+  updateTempScale,
+  updateTempWithNewScale,
+  showTempScale
 };
