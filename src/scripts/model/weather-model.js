@@ -83,8 +83,12 @@ async function getCurrentTemp(location) {
   return isCelsius ? tempC : tempF;
 }
 
-async function changeTempScale() {
+function changeTempScale() {
   isCelsius = !isCelsius;
+}
+
+function getTempScale() {
+    return isCelsius;
 }
 
 export {
@@ -95,4 +99,5 @@ export {
   getLocation,
   getCurrentTemp,
   changeTempScale,
+  getTempScale
 };
