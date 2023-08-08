@@ -91,6 +91,13 @@ function getTempScale() {
     return isCelsius;
 }
 
+async function getWeatherCondition(location) {
+    const weather = await getCurrentWeather(location);
+    const weatherCondition = weather.condition.text;
+
+    return weatherCondition;
+}
+
 export {
   getForecastInfo,
   getTime,
@@ -99,5 +106,6 @@ export {
   getLocation,
   getCurrentTemp,
   changeTempScale,
-  getTempScale
+  getTempScale,
+  getWeatherCondition
 };
