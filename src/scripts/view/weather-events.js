@@ -8,7 +8,6 @@ function handleWeatherEvents() {
 
   tempScale.addEventListener("click", () => {
     updateTempScale();
-    updateTempWithNewScale();
   });
 }
 
