@@ -3,6 +3,7 @@ import {
   getCurrentTemp,
   getDate,
   getDayName,
+  getHumidity,
   getLocation,
   getTempFeel,
   getTempScale,
@@ -22,43 +23,44 @@ import {
   displayWeatherCondition,
   displayWeatherConditnionIcon,
   displayTempFeel,
+  displayHumidity,
 } from "../view/weather-view";
 
-function updateTime() {
-  const time = getTime();
+function updateTime(location) {
+  const time = getTime(location);
   time.then((result) => displayTime(result));
 }
 
-function updateDate() {
-  const date = getDate();
+function updateDate(location) {
+  const date = getDate(location);
   date.then((result) => displayDate(result));
 }
 
-function updateDay() {
-  const dayName = getDayName();
+function updateDay(location) {
+  const dayName = getDayName(location);
   dayName.then((result) => displayDay(result));
 }
 
-function updateCity() {
-  getLocation().then((result) => {
+function updateCity(location) {
+  getLocation(location).then((result) => {
     displayCity(result.city);
   });
 }
 
-function updateRegion() {
-  getLocation().then((result) => {
+function updateRegion(location) {
+  getLocation(location).then((result) => {
     displayRegion(result.regionN);
   });
 }
 
-function updateCountry() {
-  getLocation().then((result) => {
+function updateCountry(location) {
+  getLocation(location).then((result) => {
     displayCountry(result.countryN);
   });
 }
 
-function updateCurrentTemp() {
-  const currentTemp = getCurrentTemp();
+function updateCurrentTemp(location) {
+  const currentTemp = getCurrentTemp(location);
   currentTemp.then((result) => displayCurrentTemp(result));
 }
 
@@ -71,28 +73,33 @@ function showTempScale() {
   }
 }
 
-function updateTempFeel() {
-  const tempFeel = getTempFeel();
-  tempFeel.then(result => {
-    displayTempFeel(result)
-  })
+function updateTempFeel(location) {
+  const tempFeel = getTempFeel(location);
+  tempFeel.then((result) => {
+    displayTempFeel(result);
+  });
 }
 
 function updateTempScale() {
   changeTempScale();
   showTempScale();
-  updateCurrentTemp()
-  updateTempFeel()
+  updateCurrentTemp();
+  updateTempFeel();
 }
 
-function updateWeatherCondition() {
-  const weatherCondition = getWeatherCondition();
+function updateWeatherCondition(location) {
+  const weatherCondition = getWeatherCondition(location);
   weatherCondition.then((result) => displayWeatherCondition(result));
 }
 
-function updateWeatherConditionIcon() {
-  const weatherConditionIcon = getWeatherConditionIcon();
+function updateWeatherConditionIcon(location) {
+  const weatherConditionIcon = getWeatherConditionIcon(location);
   weatherConditionIcon.then((result) => displayWeatherConditnionIcon(result));
+}
+
+function updateHumidity(location) {
+  const humidity = getHumidity(location);
+  humidity.then((result) => displayHumidity(result));
 }
 
 export {
@@ -107,5 +114,6 @@ export {
   showTempScale,
   updateWeatherCondition,
   updateWeatherConditionIcon,
-  updateTempFeel
+  updateTempFeel,
+  updateHumidity,
 };
