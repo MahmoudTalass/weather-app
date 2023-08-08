@@ -39,14 +39,6 @@ function displayTempScale(scale) {
   tempScale.textContent = scale;
 }
 
-function getDisplayedTemps() {
-  const displayedTemp = document.querySelector(".temp");
-  const tempText = displayedTemp.textContent;
-  const tempAsNumber = tempText.substring(0, tempText.length - 1);
-
-  return tempAsNumber;
-}
-
 function displayWeatherCondition(condition) {
   const weatherCondition = document.querySelector("#weather-condition");
   weatherCondition.textContent = condition;
