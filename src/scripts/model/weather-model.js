@@ -4,9 +4,12 @@ let isCelsius = false;
 async function getForecastInfo(location = "Greenbelt") {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}`;
   const data = await fetch(url, { mode: "cors" });
-  const forecastJson = await data.json();
+  if (data.ok) {
+    const forecastJson = await data.json();
 
-  return forecastJson;
+    return forecastJson;
+  }
+  return false;
 }
 
 async function getLocationData(location) {
@@ -17,21 +20,17 @@ async function getLocationData(location) {
 }
 
 async function getLocation(location) {
-  try {
-    // wait because getLocationData() contains async operation
-    const locationData = await getLocationData(location);
-    const city = locationData.name;
-    const regionN = locationData.region;
-    const countryN = locationData.country;
+  // wait because getLocationData() contains async operation
+  const locationData = await getLocationData(location);
+  const city = locationData.name;
+  const regionN = locationData.region;
+  const countryN = locationData.country;
 
-    return {
-      city,
-      regionN,
-      countryN,
-    };
-  } catch (err) {
-    return "Location was not found";
-  }
+  return {
+    city,
+    regionN,
+    countryN,
+  };
 }
 
 async function getTimeZone(location) {
@@ -88,21 +87,21 @@ function changeTempScale() {
 }
 
 function getTempScale() {
-    return isCelsius;
+  return isCelsius;
 }
 
 async function getWeatherCondition(location) {
-    const weather = await getCurrentWeather(location);
-    const weatherCondition = weather.condition.text;
+  const weather = await getCurrentWeather(location);
+  const weatherCondition = weather.condition.text;
 
-    return weatherCondition;
+  return weatherCondition;
 }
 
 async function getWeatherConditionIcon(location) {
-    const weather = await getCurrentWeather(location);
-    const weatherConditionIcon = weather.condition.icon;
+  const weather = await getCurrentWeather(location);
+  const weatherConditionIcon = weather.condition.icon;
 
-    return weatherConditionIcon
+  return weatherConditionIcon;
 }
 
 export {
@@ -115,5 +114,5 @@ export {
   changeTempScale,
   getTempScale,
   getWeatherCondition,
-  getWeatherConditionIcon
+  getWeatherConditionIcon,
 };
