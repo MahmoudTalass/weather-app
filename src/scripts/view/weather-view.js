@@ -58,6 +58,12 @@ function displayTempFeel(temp) {
   tempFeel.textContent = `${temp}°`;
 }
 
+function displayHumidity(humidityLevel) {
+  const humidity = document.querySelector("#humidity");
+
+  humidity.textContent = `${humidityLevel}%`;
+}
+
 export {
   displayTime,
   displayDate,
@@ -69,5 +75,6 @@ export {
   displayTempScale,
   displayWeatherCondition,
   displayWeatherConditnionIcon,
-  displayTempFeel
+  displayTempFeel,
+  displayHumidity,
 };
