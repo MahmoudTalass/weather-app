@@ -47,6 +47,11 @@ function getDisplayedTemp() {
   return tempAsNumber;
 }
 
+function displayWeatherCondition(condition) {
+  const weatherCondition = document.querySelector("#weather-condition");
+  weatherCondition.textContent = condition;
+}
+
 export {
   displayTime,
   displayDate,
@@ -57,4 +62,5 @@ export {
   displayCurrentTemp,
   displayTempScale,
   getDisplayedTemp,
+  displayWeatherCondition
 };
