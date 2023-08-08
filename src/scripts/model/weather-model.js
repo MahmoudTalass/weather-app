@@ -70,7 +70,7 @@ async function getTime(location) {
 
 async function getCurrentWeather(location) {
   const weatherInfo = await getForecastInfo(location);
-  console.log(weatherInfo.current);
+  console.log(weatherInfo);
   return weatherInfo.current;
 }
 
@@ -112,6 +112,13 @@ async function getTempFeel(location) {
   return isCelsius ? feelsLikeC : feelsLikeF;
 }
 
+async function getHumidity(location) {
+  const weatherInfo = await getCurrentWeather(location);
+  const { humidity } = weatherInfo;
+
+  return humidity;
+}
+
 export {
   getForecastInfo,
   getTime,
@@ -123,5 +130,6 @@ export {
   getTempScale,
   getWeatherCondition,
   getWeatherConditionIcon,
-  getTempFeel
+  getTempFeel,
+  getHumidity,
 };
