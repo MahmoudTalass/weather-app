@@ -3,6 +3,7 @@ import {
   getCurrentTemp,
   getDate,
   getDayName,
+  getFutureWeather,
   getHumidity,
   getLocation,
   getTempFeel,
@@ -24,44 +25,43 @@ import {
   displayWeatherConditnionIcon,
   displayTempFeel,
   displayHumidity,
+  displayFutureWeather,
+  clearFutureWeatherCont,
 } from "../view/weather-view";
 
-function updateTime(location) {
-  const time = getTime(location);
-  time.then((result) => displayTime(result));
+async function updateTime(location) {
+  const time = await getTime(location);
+  displayTime(time);
 }
 
-function updateDate(location) {
-  const date = getDate(location);
-  date.then((result) => displayDate(result));
+async function updateDate(location) {
+  const date = await getDate(location);
+  displayDate(date);
 }
 
-function updateDay(location) {
+async function updateDay(location) {
   const dayName = getDayName(location);
-  dayName.then((result) => displayDay(result));
+  displayDay(dayName);
 }
 
-function updateCity(location) {
-  getLocation(location).then((result) => {
-    displayCity(result.city);
-  });
+async function updateCity(location) {
+  const receivedLocation = await getLocation(location);
+  displayCity(receivedLocation.city);
 }
 
-function updateRegion(location) {
-  getLocation(location).then((result) => {
-    displayRegion(result.regionN);
-  });
+async function updateRegion(location) {
+  const receivedLocation = await getLocation(location);
+  displayRegion(receivedLocation.regionN);
 }
 
-function updateCountry(location) {
-  getLocation(location).then((result) => {
-    displayCountry(result.countryN);
-  });
+async function updateCountry(location) {
+  const receivedLocation = await getLocation(location);
+  displayCountry(receivedLocation.countryN);
 }
 
-function updateCurrentTemp(location) {
-  const currentTemp = getCurrentTemp(location);
-  currentTemp.then((result) => displayCurrentTemp(result));
+async function updateCurrentTemp(location) {
+  const currentTemp = await getCurrentTemp(location);
+  displayCurrentTemp(currentTemp);
 }
 
 function showTempScale() {
@@ -73,10 +73,25 @@ function showTempScale() {
   }
 }
 
-function updateTempFeel(location) {
-  const tempFeel = getTempFeel(location);
-  tempFeel.then((result) => {
-    displayTempFeel(result);
+async function updateTempFeel(location) {
+  const tempFeel = await getTempFeel(location);
+  displayTempFeel(tempFeel);
+}
+
+async function updateFutureWeather(location) {
+  clearFutureWeatherCont();
+  const futureWeather = await getFutureWeather(location);
+  const futureWeatherArr = await Promise.all(futureWeather.forecastday);
+
+  futureWeatherArr.forEach((forecast, index) => {
+    if (index !== 0) {
+      const date = forecast.date.substring(5);
+      const tempF = forecast.day.avgtemp_f;
+      const tempC = forecast.day.avgtemp_c;
+
+      const temp = getTempScale() ? tempC : tempF;
+      displayFutureWeather(date, temp);
+    }
   });
 }
 
@@ -85,21 +100,22 @@ function updateTempScale() {
   showTempScale();
   updateCurrentTemp();
   updateTempFeel();
+  updateFutureWeather();
 }
 
-function updateWeatherCondition(location) {
-  const weatherCondition = getWeatherCondition(location);
-  weatherCondition.then((result) => displayWeatherCondition(result));
+async function updateWeatherCondition(location) {
+  const weatherCondition = await getWeatherCondition(location);
+  displayWeatherCondition(weatherCondition);
 }
 
-function updateWeatherConditionIcon(location) {
-  const weatherConditionIcon = getWeatherConditionIcon(location);
-  weatherConditionIcon.then((result) => displayWeatherConditnionIcon(result));
+async function updateWeatherConditionIcon(location) {
+  const weatherConditionIcon = await getWeatherConditionIcon(location);
+  displayWeatherConditnionIcon(weatherConditionIcon);
 }
 
-function updateHumidity(location) {
-  const humidity = getHumidity(location);
-  humidity.then((result) => displayHumidity(result));
+async function updateHumidity(location) {
+  const humidity = await getHumidity(location);
+  displayHumidity(humidity);
 }
 
 export {
@@ -116,4 +132,5 @@ export {
   updateWeatherConditionIcon,
   updateTempFeel,
   updateHumidity,
+  updateFutureWeather,
 };
