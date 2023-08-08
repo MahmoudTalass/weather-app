@@ -104,6 +104,14 @@ async function getWeatherConditionIcon(location) {
   return weatherConditionIcon;
 }
 
+async function getTempFeel(location) {
+  const weatherInfo = await getCurrentWeather(location);
+  const feelsLikeC = weatherInfo.feelslike_c;
+  const feelsLikeF = weatherInfo.feelslike_f;
+
+  return isCelsius ? feelsLikeC : feelsLikeF;
+}
+
 export {
   getForecastInfo,
   getTime,
@@ -115,4 +123,5 @@ export {
   getTempScale,
   getWeatherCondition,
   getWeatherConditionIcon,
+  getTempFeel
 };
