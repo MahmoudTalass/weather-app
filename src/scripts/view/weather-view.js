@@ -64,6 +64,36 @@ function displayHumidity(humidityLevel) {
   humidity.textContent = `${humidityLevel}%`;
 }
 
+function displayFutureWeather(date, temp) {
+  const futureForecastsContainer = document.querySelector(
+    "#future-forecast-container",
+  );
+
+  const futureForecast = document.createElement("div");
+  const futureDate = document.createElement("p");
+  const futureTemp = document.createElement("p");
+
+  futureForecast.classList.add("future-forecast-item");
+
+  futureDate.id = "future-date";
+  futureTemp.id = "future-temp";
+
+  futureDate.textContent = date;
+  futureTemp.textContent = `${temp}°`;
+
+  futureForecast.appendChild(futureDate);
+  futureForecast.appendChild(futureTemp);
+
+  futureForecastsContainer.appendChild(futureForecast);
+}
+
+function clearFutureWeatherCont() {
+  const futureForecastsContainer = document.querySelector(
+    "#future-forecast-container",
+  );
+  futureForecastsContainer.innerHTML = "";
+}
+
 export {
   displayTime,
   displayDate,
@@ -77,4 +107,6 @@ export {
   displayWeatherConditnionIcon,
   displayTempFeel,
   displayHumidity,
+  displayFutureWeather,
+  clearFutureWeatherCont,
 };
