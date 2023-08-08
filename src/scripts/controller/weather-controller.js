@@ -4,6 +4,7 @@ import {
   getDate,
   getDayName,
   getLocation,
+  getTempFeel,
   getTempScale,
   getTime,
   getWeatherCondition,
@@ -18,9 +19,9 @@ import {
   displayCountry,
   displayCurrentTemp,
   displayTempScale,
-  getDisplayedTemp,
   displayWeatherCondition,
   displayWeatherConditnionIcon,
+  displayTempFeel,
 } from "../view/weather-view";
 
 function updateTime() {
@@ -61,18 +62,6 @@ function updateCurrentTemp() {
   currentTemp.then((result) => displayCurrentTemp(result));
 }
 
-function convertToCelsius(temp) {
-  const celsiusTemp = (Number(temp) * 9) / 5 + 32;
-
-  return celsiusTemp.toFixed(1);
-}
-
-function convertToFahrenheit(temp) {
-  const fahrenheitTemp = ((Number(temp) - 32) * 5) / 9;
-
-  return fahrenheitTemp.toFixed(1);
-}
-
 function showTempScale() {
   const currentScale = getTempScale();
   if (currentScale) {
@@ -82,21 +71,18 @@ function showTempScale() {
   }
 }
 
-function updateTempWithNewScale() {
-  const currentScale = getTempScale();
-  const currentTemp = getDisplayedTemp();
-  let updatedScaleTemp;
-  if (currentScale) {
-    updatedScaleTemp = convertToFahrenheit(currentTemp);
-  } else {
-    updatedScaleTemp = convertToCelsius(currentTemp);
-  }
-  displayCurrentTemp(updatedScaleTemp);
+function updateTempFeel() {
+  const tempFeel = getTempFeel();
+  tempFeel.then(result => {
+    displayTempFeel(result)
+  })
 }
 
 function updateTempScale() {
   changeTempScale();
   showTempScale();
+  updateCurrentTemp()
+  updateTempFeel()
 }
 
 function updateWeatherCondition() {
@@ -118,8 +104,8 @@ export {
   updateCountry,
   updateCurrentTemp,
   updateTempScale,
-  updateTempWithNewScale,
   showTempScale,
   updateWeatherCondition,
-  updateWeatherConditionIcon
+  updateWeatherConditionIcon,
+  updateTempFeel
 };
