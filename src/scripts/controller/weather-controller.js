@@ -59,12 +59,14 @@ function updateCurrentTemp() {
 
 function convertToCelsius(temp) {
   const celsiusTemp = (Number(temp) * 9) / 5 + 32;
-  return celsiusTemp;
+
+  return celsiusTemp.toFixed(1);
 }
 
 function convertToFahrenheit(temp) {
   const fahrenheitTemp = ((Number(temp) - 32) * 5) / 9;
-  return fahrenheitTemp;
+
+  return fahrenheitTemp.toFixed(1);
 }
 
 function showTempScale() {
@@ -80,6 +82,7 @@ function updateTempWithNewScale() {
   const currentScale = getTempScale();
   const currentTemp = getDisplayedTemp();
   let updatedScaleTemp;
+  debugger
   if (currentScale) {
     updatedScaleTemp = convertToFahrenheit(currentTemp);
   } else {
@@ -103,5 +106,5 @@ export {
   updateCurrentTemp,
   updateTempScale,
   updateTempWithNewScale,
-  showTempScale
+  showTempScale,
 };
