@@ -67,7 +67,6 @@ export {
   displayRegion,
   displayCurrentTemp,
   displayTempScale,
-  getDisplayedTemps,
   displayWeatherCondition,
   displayWeatherConditnionIcon,
   displayTempFeel

@@ -1,6 +1,5 @@
 import {
   updateTempScale,
-  updateTempWithNewScale,
 } from "../controller/weather-controller";
 
 function handleWeatherEvents() {
