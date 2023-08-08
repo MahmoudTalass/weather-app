@@ -7,6 +7,7 @@ import {
   getTempScale,
   getTime,
   getWeatherCondition,
+  getWeatherConditionIcon,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -19,6 +20,7 @@ import {
   displayTempScale,
   getDisplayedTemp,
   displayWeatherCondition,
+  displayWeatherConditnionIcon,
 } from "../view/weather-view";
 
 function updateTime() {
@@ -102,6 +104,11 @@ function updateWeatherCondition() {
   weatherCondition.then((result) => displayWeatherCondition(result));
 }
 
+function updateWeatherConditionIcon() {
+  const weatherConditionIcon = getWeatherConditionIcon();
+  weatherConditionIcon.then((result) => displayWeatherConditnionIcon(result));
+}
+
 export {
   updateTime,
   updateDate,
@@ -114,4 +121,5 @@ export {
   updateTempWithNewScale,
   showTempScale,
   updateWeatherCondition,
+  updateWeatherConditionIcon
 };
