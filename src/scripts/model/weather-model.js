@@ -98,6 +98,13 @@ async function getWeatherCondition(location) {
     return weatherCondition;
 }
 
+async function getWeatherConditionIcon(location) {
+    const weather = await getCurrentWeather(location);
+    const weatherConditionIcon = weather.condition.icon;
+
+    return weatherConditionIcon
+}
+
 export {
   getForecastInfo,
   getTime,
@@ -107,5 +114,6 @@ export {
   getCurrentTemp,
   changeTempScale,
   getTempScale,
-  getWeatherCondition
+  getWeatherCondition,
+  getWeatherConditionIcon
 };
