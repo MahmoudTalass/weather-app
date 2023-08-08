@@ -39,8 +39,8 @@ function displayTempScale(scale) {
   tempScale.textContent = scale;
 }
 
-function getDisplayedTemp() {
-  const displayedTemp = document.querySelector("#current-temp");
+function getDisplayedTemps() {
+  const displayedTemp = document.querySelector(".temp");
   const tempText = displayedTemp.textContent;
   const tempAsNumber = tempText.substring(0, tempText.length - 1);
 
@@ -53,9 +53,17 @@ function displayWeatherCondition(condition) {
 }
 
 function displayWeatherConditnionIcon(icon) {
-    const weatherConditionIcon = document.querySelector("#weather-condition-icon")
+  const weatherConditionIcon = document.querySelector(
+    "#weather-condition-icon",
+  );
 
-    weatherConditionIcon.src = icon
+  weatherConditionIcon.src = icon;
+}
+
+function displayTempFeel(temp) {
+  const tempFeel = document.querySelector("#temp-feel");
+
+  tempFeel.textContent = `${temp}°`;
 }
 
 export {
@@ -67,7 +75,8 @@ export {
   displayRegion,
   displayCurrentTemp,
   displayTempScale,
-  getDisplayedTemp,
+  getDisplayedTemps,
   displayWeatherCondition,
-  displayWeatherConditnionIcon
+  displayWeatherConditnionIcon,
+  displayTempFeel
 };
