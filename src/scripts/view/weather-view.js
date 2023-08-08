@@ -52,6 +52,12 @@ function displayWeatherCondition(condition) {
   weatherCondition.textContent = condition;
 }
 
+function displayWeatherConditnionIcon(icon) {
+    const weatherConditionIcon = document.querySelector("#weather-condition-icon")
+
+    weatherConditionIcon.src = icon
+}
+
 export {
   displayTime,
   displayDate,
@@ -62,5 +68,6 @@ export {
   displayCurrentTemp,
   displayTempScale,
   getDisplayedTemp,
-  displayWeatherCondition
+  displayWeatherCondition,
+  displayWeatherConditnionIcon
 };
