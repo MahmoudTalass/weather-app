@@ -40,7 +40,7 @@ async function updateDate(location) {
 }
 
 async function updateDay(location) {
-  const dayName = getDayName(location);
+  const dayName = await getDayName(location);
   displayDay(dayName);
 }
 
