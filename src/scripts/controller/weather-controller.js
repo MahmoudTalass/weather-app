@@ -6,6 +6,7 @@ import {
   getLocation,
   getTempScale,
   getTime,
+  getWeatherCondition,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -17,6 +18,7 @@ import {
   displayCurrentTemp,
   displayTempScale,
   getDisplayedTemp,
+  displayWeatherCondition,
 } from "../view/weather-view";
 
 function updateTime() {
@@ -82,7 +84,6 @@ function updateTempWithNewScale() {
   const currentScale = getTempScale();
   const currentTemp = getDisplayedTemp();
   let updatedScaleTemp;
-  debugger
   if (currentScale) {
     updatedScaleTemp = convertToFahrenheit(currentTemp);
   } else {
@@ -96,6 +97,11 @@ function updateTempScale() {
   showTempScale();
 }
 
+function updateWeatherCondition() {
+  const weatherCondition = getWeatherCondition();
+  weatherCondition.then((result) => displayWeatherCondition(result));
+}
+
 export {
   updateTime,
   updateDate,
@@ -107,4 +113,5 @@ export {
   updateTempScale,
   updateTempWithNewScale,
   showTempScale,
+  updateWeatherCondition,
 };
