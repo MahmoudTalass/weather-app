@@ -16,12 +16,8 @@
     <main class="root" id="root">
       <section class="all-info-container">
         <div class="location-search-container">
-            <button class="search-btn" id="search-btn">Search</button>
-            <input
-              type="search"
-              class="location-search"
-              id="location-search"
-            />
+          <button class="search-btn" id="search-btn">Search</button>
+          <input type="search" class="location-search" id="location-search" />
         </div>
         <section class="location-date-time-info">
           <div class="location-info">
@@ -38,10 +34,18 @@
         <section class="weather-info">
           <div class="today-forecast-container">
             <div class="main-info">
-              <p class="weather-condition" id="weather-condition">Rainy</p>
-              <div class="temp-container">
-                <p class="temp" id="temp">38°</p>
-                <p class="temp-scale" id="temp-scale">C</p>
+              <img
+                src=""
+                alt="weather-condition-icon"
+                class="weather-condition-icon"
+                id="weather-condition-icon"
+              />
+              <div class="temp-and-condition-container">
+                <p class="weather-condition" id="weather-condition">Rainy</p>
+                <div class="temp-container">
+                  <p class="current-temp" id="current-temp">38°</p>
+                  <p class="temp-scale" id="temp-scale">C</p>
+                </div>
               </div>
             </div>
             <div class="other-info-container">
