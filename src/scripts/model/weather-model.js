@@ -2,7 +2,7 @@ const KEY = "2b31c3c95d8f4664beb190158233107";
 let isCelsius = false;
 
 async function getForecastInfo(location = "Greenbelt") {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=4`;
   const data = await fetch(url, { mode: "cors" });
   if (data.ok) {
     const forecastJson = await data.json();
@@ -119,6 +119,12 @@ async function getHumidity(location) {
   return humidity;
 }
 
+async function getFutureWeather(location) {
+  const futureWeather = await getForecastInfo(location);
+
+  return futureWeather.forecast;
+}
+
 export {
   getForecastInfo,
   getTime,
@@ -132,4 +138,5 @@ export {
   getWeatherConditionIcon,
   getTempFeel,
   getHumidity,
+  getFutureWeather,
 };
