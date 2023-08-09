@@ -116,7 +116,13 @@ function clearLocationOptions() {
 function clearLocationSearchInput() {
   const locationSearch = document.querySelector("#location-search");
 
-  locationSearch.textContent = "";
+  locationSearch.value = "";
+}
+
+function toggleLoadingPage() {
+  const loadingPage = document.querySelector("#loading-page")
+  
+  loadingPage.classList.toggle("visible");
 }
 
 export {
@@ -137,4 +143,5 @@ export {
   displayLocationOption,
   clearLocationOptions,
   clearLocationSearchInput,
+  toggleLoadingPage
 };
