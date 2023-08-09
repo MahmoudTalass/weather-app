@@ -11,6 +11,7 @@ import {
   getTime,
   getWeatherCondition,
   getWeatherConditionIcon,
+  searchLocations,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -27,6 +28,8 @@ import {
   displayHumidity,
   displayFutureWeather,
   clearFutureWeatherCont,
+  displayLocationOption,
+  clearLocationOptions,
 } from "../view/weather-view";
 
 async function updateTime(location) {
@@ -118,6 +121,18 @@ async function updateHumidity(location) {
   displayHumidity(humidity);
 }
 
+async function updateLocationOptions(input) {
+  clearLocationOptions()
+  
+  const locationsArr = await searchLocations(input);
+  locationsArr.forEach((location) => {
+    const { name, region, country } = location;
+    const fullLocation = `${name}, ${region}, ${country}`;
+    displayLocationOption(fullLocation)
+  });
+  console.log(locationsArr);
+}
+
 export {
   updateTime,
   updateDate,
@@ -133,4 +148,5 @@ export {
   updateTempFeel,
   updateHumidity,
   updateFutureWeather,
+  updateLocationOptions,
 };
