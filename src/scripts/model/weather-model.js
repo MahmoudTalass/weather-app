@@ -1,7 +1,7 @@
 const KEY = "2b31c3c95d8f4664beb190158233107";
 let isCelsius = false;
 
-async function getForecastInfo(location = "Greenbelt") {
+async function getForecastInfo(location = "New York city") {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=4`;
   const data = await fetch(url, { mode: "cors" });
   if (data.ok) {
@@ -57,20 +57,22 @@ async function getDayName(location) {
   // wait because getDate() contains async operations
   const date = new Date(await getDate(location));
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+
   return dayName;
 }
 
 async function getTime(location) {
   // wait because getTimeZone() contains async operations
   const timeZone = await getTimeZone(location);
-  const time = timeZone.substring(10);
+  const time = timeZone.substring(10, 14);
+  const pmOram = timeZone.substring(18);
 
-  return `${time}`;
+  return { time, pmOram };
 }
 
 async function getCurrentWeather(location) {
   const weatherInfo = await getForecastInfo(location);
-  console.log(weatherInfo);
+
   return weatherInfo.current;
 }
 
@@ -128,9 +130,8 @@ async function getFutureWeather(location) {
 async function searchLocations(input) {
   const url = `https://api.weatherapi.com/v1/search.json?key=${KEY}&q=${input}`;
   const data = await fetch(url, { mode: "cors" });
-  const locationsJson = data.json()
+  const locationsJson = data.json();
 
-  console.log(locationsJson);
   return locationsJson;
 }
 
