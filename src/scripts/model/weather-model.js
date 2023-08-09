@@ -1,7 +1,7 @@
 const KEY = "2b31c3c95d8f4664beb190158233107";
 let isCelsius = false;
 
-async function getForecastInfo(location = "New York city") {
+async function getForecastInfo(location) {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=4`;
   const data = await fetch(url, { mode: "cors" });
   if (data.ok) {
@@ -10,6 +10,15 @@ async function getForecastInfo(location = "New York city") {
     return forecastJson;
   }
   return false;
+}
+
+function getCurrentLocation() {
+  const currentLocation = localStorage.getItem("location")
+  return currentLocation;
+}
+
+function setCurrentLocation(location) {
+  localStorage.setItem("location", location)
 }
 
 async function getLocationData(location) {
@@ -64,8 +73,10 @@ async function getDayName(location) {
 async function getTime(location) {
   // wait because getTimeZone() contains async operations
   const timeZone = await getTimeZone(location);
-  const time = timeZone.substring(10, 14);
-  const pmOram = timeZone.substring(18);
+  const timeAndDate = timeZone.split(",");
+  const fullTime = timeAndDate[1].split(":");
+  const time = `${fullTime[0]}:${fullTime[1]}`;
+  const pmOram = fullTime[2].slice(-2);
 
   return { time, pmOram };
 }
@@ -150,4 +161,6 @@ export {
   getHumidity,
   getFutureWeather,
   searchLocations,
+  getCurrentLocation,
+  setCurrentLocation
 };
