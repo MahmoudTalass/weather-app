@@ -57,14 +57,17 @@ async function getTimeZone(location) {
 async function getDate(location) {
   // wait because getTimeZone() contains async operations
   const timeZone = await getTimeZone(location);
-  const date = timeZone.substring(0, 8);
+  const dateAndTime = timeZone.split(",")
+  const date = dateAndTime[0];
 
   return date;
 }
 
 async function getDayName(location) {
   // wait because getDate() contains async operations
-  const date = new Date(await getDate(location));
+  debugger
+  const locationDate = await getDate(location);
+  const date = new Date(locationDate);
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
 
   return dayName;
