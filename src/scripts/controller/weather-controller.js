@@ -12,7 +12,6 @@ import {
   getWeatherCondition,
   getWeatherConditionIcon,
   searchLocations,
-  getForecastInfo,
   getCurrentLocation,
 } from "../model/weather-model";
 import {
