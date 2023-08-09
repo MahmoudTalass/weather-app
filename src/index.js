@@ -8,6 +8,7 @@ import {
   getDayName,
   getTime,
   getLocation,
+  setCurrentLocation,
 } from "./scripts/model/weather-model";
 import {
   updateTime,
@@ -26,8 +27,14 @@ import {
   updateFutureWeather,
   updateLocationOptions,
   startProgram,
+  setTimeIntervals,
 } from "./scripts/controller/weather-controller";
 import handleWeatherEvents from "./scripts/view/weather-events";
 
+const localLocation = localStorage.getItem("location")
+if (localLocation === undefined) setCurrentLocation("New York")
+
 startProgram();
 handleWeatherEvents();
+setTimeIntervals();
+
