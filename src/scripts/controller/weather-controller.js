@@ -31,6 +31,7 @@ import {
   clearFutureWeatherCont,
   displayLocationOption,
   clearLocationOptions,
+  toggleLoadingPage,
 } from "../view/weather-view";
 
 async function updateTime(location) {
@@ -135,6 +136,7 @@ async function updateLocationOptions(input) {
 }
 
 async function startProgram(location) {
+  toggleLoadingPage();
   const validLocation = await getForecastInfo(location);
   if (validLocation) {
     setInterval(() => {
@@ -168,6 +170,7 @@ async function startProgram(location) {
     updateCountry(location);
 
     showTempScale();
+    toggleLoadingPage();
   }
 }
 
