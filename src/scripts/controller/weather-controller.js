@@ -13,6 +13,7 @@ import {
   getWeatherConditionIcon,
   searchLocations,
   getForecastInfo,
+  getCurrentLocation,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -135,43 +136,48 @@ async function updateLocationOptions(input) {
   console.log(locationsArr);
 }
 
-async function startProgram(location) {
+async function startProgram() {
   toggleLoadingPage();
-  const validLocation = await getForecastInfo(location);
-  if (validLocation) {
-    setInterval(() => {
-      updateDate(location);
-      updateDay(location);
-      updateTime(location);
-    }, 10000);
 
-    setInterval(() => {
-      updateWeatherCondition(location);
-      updateWeatherConditionIcon(location);
-      updateHumidity(location);
-      updateTempFeel(location);
-      updateCurrentTemp(location);
-      updateFutureWeather(location);
-    }, 3600000);
+  const currentLocation = getCurrentLocation();
 
-    updateTime(location);
-    updateDate(location);
-    updateDay(location);
+  updateTime(currentLocation);
+  updateDate(currentLocation);
+  updateDay(currentLocation);
 
-    updateWeatherCondition(location);
-    updateWeatherConditionIcon(location);
-    updateHumidity(location);
-    updateTempFeel(location);
-    updateCurrentTemp(location);
-    updateFutureWeather(location);
+  updateWeatherCondition(currentLocation);
+  updateWeatherConditionIcon(currentLocation);
+  updateHumidity(currentLocation);
+  updateTempFeel(currentLocation);
+  updateCurrentTemp(currentLocation);
+  updateFutureWeather(currentLocation);
 
-    updateCity(location);
-    updateRegion(location);
-    updateCountry(location);
+  updateCity(currentLocation);
+  updateRegion(currentLocation);
+  updateCountry(currentLocation);
 
-    showTempScale();
-    toggleLoadingPage();
-  }
+  showTempScale();
+
+  toggleLoadingPage();
+}
+
+function setTimeIntervals() {
+  setInterval(() => {
+    const currentLocation = getCurrentLocation();
+    updateDate(currentLocation);
+    updateDay(currentLocation);
+    updateTime(currentLocation);
+  }, 60000);
+
+  setInterval(() => {
+    const currentLocation = getCurrentLocation();
+    updateWeatherCondition(currentLocation);
+    updateWeatherConditionIcon(currentLocation);
+    updateHumidity(currentLocation);
+    updateTempFeel(currentLocation);
+    updateCurrentTemp(currentLocation);
+    updateFutureWeather(currentLocation);
+  }, 3600000);
 }
 
 export {
@@ -191,4 +197,5 @@ export {
   updateFutureWeather,
   updateLocationOptions,
   startProgram,
+  setTimeIntervals,
 };
