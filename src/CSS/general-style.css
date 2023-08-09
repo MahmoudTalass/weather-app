@@ -31,29 +31,29 @@ body {
 /* Location search bar */
 .location-search-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
-}
-
-.search-btn {
-  border: none;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  padding: 0.5rem;
-  background-color: #ece6e6;
 }
 
 .location-search {
   border: 1px solid #ece6e6;
-  border-left: none;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  flex: 1;
+  border-radius: 0.5rem;
   padding-left: 0.3rem;
   outline: none;
+  height: 2rem;
 }
 
-.search-btn:active {
-  background-color: #aaa;
+.location-options {
+  overflow: auto;
+  height: 0;
+  transition: height 300ms ease-in-out;
+}
+
+.location-option {
+  padding: 1rem;
+  cursor: pointer;
+  border: 1px solid #ece6e6;
+  border-top: 0;
 }
 
 /* Location, date, and time info container styles */
@@ -67,7 +67,6 @@ body {
 .location-info {
   display: flex;
   flex-direction: column;
-  text-align: center;
   gap: 0.5rem;
   font-size: 1.5rem;
   justify-self: start;
@@ -180,6 +179,7 @@ body {
   .location-info {
     align-items: center;
     justify-self: center;
+    text-align: center;
   }
 
   .date-time-info {
