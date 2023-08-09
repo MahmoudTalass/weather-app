@@ -73,12 +73,15 @@ function displayFutureWeather(date, temp) {
   const futureDate = document.createElement("p");
   const futureTemp = document.createElement("p");
 
+  const month = date.substring(0, 2);
+  const day = date.substring(3);
+
   futureForecast.classList.add("future-forecast-item");
 
   futureDate.id = "future-date";
   futureTemp.id = "future-temp";
 
-  futureDate.textContent = date;
+  futureDate.textContent = `${month}/${day}`;
   futureTemp.textContent = `${temp}°`;
 
   futureForecast.appendChild(futureDate);
