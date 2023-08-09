@@ -9,21 +9,25 @@ import {
   getTime,
   getLocation,
 } from "./scripts/model/weather-model";
-import { updateTime, updateDate, updateDay, updateCity, updateRegion, updateCountry } from "./scripts/controller/weather-controller";
+import {
+  updateTime,
+  updateDate,
+  updateDay,
+  updateCity,
+  updateRegion,
+  updateCountry,
+  updateCurrentTemp,
+  updateTempScale,
+  showTempScale,
+  updateWeatherCondition,
+  updateWeatherConditionIcon,
+  updateTempFeel,
+  updateHumidity,
+  updateFutureWeather,
+  updateLocationOptions,
+  startProgram,
+} from "./scripts/controller/weather-controller";
+import handleWeatherEvents from "./scripts/view/weather-events";
 
-// console.log(getForecastInfo())
-// console.log(getDayName(), getDate())
-// console.log(getLocation())
-updateTime();
-setInterval(() => {
-  updateTime();
-}, 500);
-
-setInterval(() => {
-  updateDate();
-}, 1000)
-
-updateDay()
-updateCity()
-updateRegion()
-updateCountry()
+startProgram();
+handleWeatherEvents();
