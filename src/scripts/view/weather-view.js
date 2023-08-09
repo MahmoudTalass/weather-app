@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-function displayTime(time) {
+function displayTime({ time, pmOram }) {
   const timeContainer = document.querySelector("#time");
-  timeContainer.textContent = time;
+  timeContainer.textContent = `${time} ${pmOram}`;
 }
 
 function displayDay(day) {
@@ -113,6 +113,12 @@ function clearLocationOptions() {
   optionsContainer.innerHTML = "";
 }
 
+function clearLocationSearchInput() {
+  const locationSearch = document.querySelector("#location-search");
+
+  locationSearch.textContent = "";
+}
+
 export {
   displayTime,
   displayDate,
@@ -130,4 +136,5 @@ export {
   clearFutureWeatherCont,
   displayLocationOption,
   clearLocationOptions,
+  clearLocationSearchInput,
 };
