@@ -12,6 +12,7 @@ import {
   getWeatherCondition,
   getWeatherConditionIcon,
   searchLocations,
+  getForecastInfo,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -122,15 +123,52 @@ async function updateHumidity(location) {
 }
 
 async function updateLocationOptions(input) {
-  clearLocationOptions()
-  
+  clearLocationOptions();
+
   const locationsArr = await searchLocations(input);
   locationsArr.forEach((location) => {
     const { name, region, country } = location;
     const fullLocation = `${name}, ${region}, ${country}`;
-    displayLocationOption(fullLocation)
+    displayLocationOption(fullLocation);
   });
   console.log(locationsArr);
+}
+
+async function startProgram(location) {
+  const validLocation = await getForecastInfo(location);
+  if (validLocation) {
+    setInterval(() => {
+      updateDate(location);
+      updateDay(location);
+      updateTime(location);
+    }, 10000);
+
+    setInterval(() => {
+      updateWeatherCondition(location);
+      updateWeatherConditionIcon(location);
+      updateHumidity(location);
+      updateTempFeel(location);
+      updateCurrentTemp(location);
+      updateFutureWeather(location);
+    }, 3600000);
+
+    updateTime(location);
+    updateDate(location);
+    updateDay(location);
+
+    updateWeatherCondition(location);
+    updateWeatherConditionIcon(location);
+    updateHumidity(location);
+    updateTempFeel(location);
+    updateCurrentTemp(location);
+    updateFutureWeather(location);
+
+    updateCity(location);
+    updateRegion(location);
+    updateCountry(location);
+
+    showTempScale();
+  }
 }
 
 export {
@@ -149,4 +187,5 @@ export {
   updateHumidity,
   updateFutureWeather,
   updateLocationOptions,
+  startProgram,
 };
