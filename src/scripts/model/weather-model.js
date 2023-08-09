@@ -65,7 +65,6 @@ async function getDate(location) {
 
 async function getDayName(location) {
   // wait because getDate() contains async operations
-  debugger
   const locationDate = await getDate(location);
   const date = new Date(locationDate);
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
