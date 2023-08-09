@@ -98,13 +98,19 @@ function clearFutureWeatherCont() {
 }
 
 function displayLocationOption(location) {
-  const optionsContainer = document.querySelector("#location-options")
-  const option = document.createElement("p")
+  const optionsContainer = document.querySelector("#location-options");
+  const option = document.createElement("p");
 
-  option.classList.add("location-option")
+  option.classList.add("location-option");
   option.textContent = location;
 
-  optionsContainer.appendChild(option)
+  optionsContainer.appendChild(option);
+}
+
+function clearLocationOptions() {
+  const optionsContainer = document.querySelector("#location-options");
+
+  optionsContainer.innerHTML = "";
 }
 
 export {
@@ -122,4 +128,6 @@ export {
   displayHumidity,
   displayFutureWeather,
   clearFutureWeatherCont,
+  displayLocationOption,
+  clearLocationOptions,
 };
