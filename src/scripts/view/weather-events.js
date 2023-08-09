@@ -31,6 +31,7 @@ function handleWeatherEvents() {
       const location = e.target.textContent;
       startProgram(location);
       clearLocationSearchInput();
+      locationOptionsContainer.style.height = "0";
     }
   });
 }
