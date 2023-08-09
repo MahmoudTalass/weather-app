@@ -125,8 +125,8 @@ async function getFutureWeather(location) {
   return futureWeather.forecast;
 }
 
-async function searchLocations(search) {
-  const url = `https://api.weatherapi.com/v1/search.json?key=${KEY}&q=${search}`;
+async function searchLocations(input) {
+  const url = `https://api.weatherapi.com/v1/search.json?key=${KEY}&q=${input}`;
   const data = await fetch(url, { mode: "cors" });
   const locationsJson = data.json()
 
