@@ -97,6 +97,16 @@ function clearFutureWeatherCont() {
   futureForecastsContainer.innerHTML = "";
 }
 
+function displayLocationOption(location) {
+  const optionsContainer = document.querySelector("#location-options")
+  const option = document.createElement("p")
+
+  option.classList.add("location-option")
+  option.textContent = location;
+
+  optionsContainer.appendChild(option)
+}
+
 export {
   displayTime,
   displayDate,
