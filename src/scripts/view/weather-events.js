@@ -3,6 +3,7 @@ import {
   updateLocationOptions,
   updateTempScale,
 } from "../controller/weather-controller";
+import { setCurrentLocation } from "../model/weather-model";
 import { clearLocationSearchInput } from "./weather-view";
 
 function handleWeatherEvents() {
@@ -29,7 +30,8 @@ function handleWeatherEvents() {
 
     if (isLocationOption) {
       const location = e.target.textContent;
-      startProgram(location);
+      setCurrentLocation(location)
+      startProgram();
       clearLocationSearchInput();
       locationOptionsContainer.style.height = "0";
     }
