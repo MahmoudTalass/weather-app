@@ -15,7 +15,7 @@ This is a web app built with HTML, CSS and JavaScript that shows the current wea
 
 To use the app:
 
-1. Visit [website url]
+1. Visit [site](https://mahmoudtalass.github.io/weather-app/)
 2. Search for any location using autocomplete search bar
 3. Last searched location is saved in localStorage
 4. Page loads weather for saved location on next visit
