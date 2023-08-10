@@ -1,18 +1,16 @@
 const KEY = "2b31c3c95d8f4664beb190158233107";
 let isCelsius = false;
 let currentTimeZone;
+let forecastInfo;
 
-async function getForecastInfo(location) {
-  try {
-    const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=4`;
-    const data = await fetch(url, { mode: "cors" });
-    const forecastJson = await data.json();
+async function setForecastInfo(location) {
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=4`;
+  console.log(url)
+  console.log(location)
+  const data = await fetch(url, { mode: "cors" });
+  const forecastJson = await data.json();
 
-    return forecastJson;
-  } catch (err) {
-    console.log(`Request failed: ${err}`);
-    throw err;
-  }
+  forecastInfo = forecastJson;
 }
 
 function getCurrentLocation() {
@@ -24,16 +22,13 @@ function setCurrentLocation(location) {
   localStorage.setItem("location", location);
 }
 
-async function getLocationData(location) {
-  // wait because getForecastInfo() is an async operation
-  const data = await getForecastInfo(location);
-  const locationData = await data.location;
+function getLocationData() {
+  const locationData = forecastInfo.location;
   return locationData;
 }
 
-async function getLocation(location) {
-  // wait because getLocationData() contains async operation
-  const locationData = await getLocationData(location);
+function getLocation() {
+  const locationData = getLocationData();
   const city = locationData.name;
   const regionN = locationData.region;
   const countryN = locationData.country;
@@ -45,10 +40,8 @@ async function getLocation(location) {
   };
 }
 
-async function setTimeZone(location) {
-  // wait because getLocationData() contains async operations
-  const locationData = await getLocationData(location);
-  console.log(locationData);
+function setTimeZone() {
+  const locationData = getLocationData();
 
   currentTimeZone = locationData.tz_id;
 }
@@ -88,14 +81,12 @@ function getTime() {
   return { time, pmOram };
 }
 
-async function getCurrentWeather(location) {
-  const weatherInfo = await getForecastInfo(location);
-
-  return weatherInfo.current;
+function getCurrentWeather() {
+  return forecastInfo.current;
 }
 
-async function getCurrentTemp(location) {
-  const weatherInfo = await getCurrentWeather(location);
+function getCurrentTemp() {
+  const weatherInfo = getCurrentWeather();
   const tempF = weatherInfo.temp_f;
   const tempC = weatherInfo.temp_c;
 
@@ -110,39 +101,37 @@ function getTempScale() {
   return isCelsius;
 }
 
-async function getWeatherCondition(location) {
-  const weather = await getCurrentWeather(location);
+function getWeatherCondition() {
+  const weather = getCurrentWeather();
   const weatherCondition = weather.condition.text;
 
   return weatherCondition;
 }
 
-async function getWeatherConditionIcon(location) {
-  const weather = await getCurrentWeather(location);
+function getWeatherConditionIcon() {
+  const weather = getCurrentWeather();
   const weatherConditionIcon = weather.condition.icon;
 
   return weatherConditionIcon;
 }
 
-async function getTempFeel(location) {
-  const weatherInfo = await getCurrentWeather(location);
+function getTempFeel() {
+  const weatherInfo = getCurrentWeather();
   const feelsLikeC = weatherInfo.feelslike_c;
   const feelsLikeF = weatherInfo.feelslike_f;
 
   return isCelsius ? feelsLikeC : feelsLikeF;
 }
 
-async function getHumidity(location) {
-  const weatherInfo = await getCurrentWeather(location);
+function getHumidity() {
+  const weatherInfo = getCurrentWeather();
   const { humidity } = weatherInfo;
 
   return humidity;
 }
 
-async function getFutureWeather(location) {
-  const futureWeather = await getForecastInfo(location);
-
-  return futureWeather.forecast;
+function getFutureWeather() {
+  return forecastInfo.forecast;
 }
 
 async function searchLocations(input) {
@@ -154,7 +143,7 @@ async function searchLocations(input) {
 }
 
 export {
-  getForecastInfo,
+  setForecastInfo,
   getTime,
   getDate,
   getDayName,
