@@ -14,6 +14,7 @@ import {
   searchLocations,
   getCurrentLocation,
   setTimeZone,
+  setForecastInfo,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -35,38 +36,38 @@ import {
   toggleLoadingPage,
 } from "../view/weather-view";
 
-function updateTime(location) {
-  const time = getTime(location);
+function updateTime() {
+  const time = getTime();
   displayTime(time);
 }
 
-function updateDate(location) {
-  const date = getDate(location);
+function updateDate() {
+  const date = getDate();
   displayDate(date);
 }
 
-async function updateDay(location) {
-  const dayName = await getDayName(location);
+function updateDay() {
+  const dayName = getDayName();
   displayDay(dayName);
 }
 
-async function updateCity(location) {
-  const receivedLocation = await getLocation(location);
+function updateCity() {
+  const receivedLocation = getLocation();
   displayCity(receivedLocation.city);
 }
 
-async function updateRegion(location) {
-  const receivedLocation = await getLocation(location);
+function updateRegion() {
+  const receivedLocation = getLocation();
   displayRegion(receivedLocation.regionN);
 }
 
-async function updateCountry(location) {
-  const receivedLocation = await getLocation(location);
+function updateCountry() {
+  const receivedLocation = getLocation();
   displayCountry(receivedLocation.countryN);
 }
 
-async function updateCurrentTemp(location) {
-  const currentTemp = await getCurrentTemp(location);
+function updateCurrentTemp() {
+  const currentTemp = getCurrentTemp();
   displayCurrentTemp(currentTemp);
 }
 
@@ -79,15 +80,15 @@ function showTempScale() {
   }
 }
 
-async function updateTempFeel(location) {
-  const tempFeel = await getTempFeel(location);
+function updateTempFeel() {
+  const tempFeel = getTempFeel();
   displayTempFeel(tempFeel);
 }
 
-async function updateFutureWeather(location) {
+function updateFutureWeather() {
   clearFutureWeatherCont();
-  const futureWeather = await getFutureWeather(location);
-  const futureWeatherArr = await Promise.all(futureWeather.forecastday);
+  const futureWeather = getFutureWeather();
+  const futureWeatherArr = futureWeather.forecastday;
 
   futureWeatherArr.forEach((forecast, index) => {
     if (index !== 0) {
@@ -109,18 +110,18 @@ function updateTempScale() {
   updateFutureWeather();
 }
 
-async function updateWeatherCondition(location) {
-  const weatherCondition = await getWeatherCondition(location);
+function updateWeatherCondition() {
+  const weatherCondition = getWeatherCondition();
   displayWeatherCondition(weatherCondition);
 }
 
-async function updateWeatherConditionIcon(location) {
-  const weatherConditionIcon = await getWeatherConditionIcon(location);
+function updateWeatherConditionIcon() {
+  const weatherConditionIcon = getWeatherConditionIcon();
   displayWeatherConditnionIcon(weatherConditionIcon);
 }
 
-async function updateHumidity(location) {
-  const humidity = await getHumidity(location);
+function updateHumidity() {
+  const humidity = getHumidity();
   displayHumidity(humidity);
 }
 
@@ -140,19 +141,20 @@ async function startProgram() {
   toggleLoadingPage();
 
   const currentLocation = getCurrentLocation();
+  await setForecastInfo(currentLocation);
 
-  await setTimeZone(currentLocation);
+  setTimeZone();
 
-  updateWeatherCondition(currentLocation);
-  updateWeatherConditionIcon(currentLocation);
-  updateHumidity(currentLocation);
-  updateTempFeel(currentLocation);
-  updateCurrentTemp(currentLocation);
-  updateFutureWeather(currentLocation);
+  updateWeatherCondition();
+  updateWeatherConditionIcon();
+  updateHumidity();
+  updateTempFeel();
+  updateCurrentTemp();
+  updateFutureWeather();
 
-  updateCity(currentLocation);
-  updateRegion(currentLocation);
-  updateCountry(currentLocation);
+  updateCity();
+  updateRegion();
+  updateCountry();
 
   updateTime();
   updateDate();
@@ -170,14 +172,16 @@ function setTimeIntervals() {
     updateTime();
   }, 20000);
 
-  setInterval(() => {
+  setInterval(async () => {
     const currentLocation = getCurrentLocation();
-    updateWeatherCondition(currentLocation);
-    updateWeatherConditionIcon(currentLocation);
-    updateHumidity(currentLocation);
-    updateTempFeel(currentLocation);
-    updateCurrentTemp(currentLocation);
-    updateFutureWeather(currentLocation);
+    await setForecastInfo(currentLocation);
+
+    updateWeatherCondition();
+    updateWeatherConditionIcon();
+    updateHumidity();
+    updateTempFeel();
+    updateCurrentTemp();
+    updateFutureWeather();
   }, 3600000);
 }
 
