@@ -5,8 +5,7 @@ let forecastInfo;
 
 async function setForecastInfo(location) {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=4`;
-  console.log(url)
-  console.log(location)
+
   const data = await fetch(url, { mode: "cors" });
   const forecastJson = await data.json();
 
