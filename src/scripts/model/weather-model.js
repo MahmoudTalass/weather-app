@@ -1,5 +1,6 @@
 const KEY = "2b31c3c95d8f4664beb190158233107";
 let isCelsius = false;
+let currentTimeZone;
 
 async function getForecastInfo(location) {
   try {
@@ -10,7 +11,7 @@ async function getForecastInfo(location) {
     return forecastJson;
   } catch (err) {
     console.log(`Request failed: ${err}`);
-    throw err
+    throw err;
   }
 }
 
@@ -44,41 +45,43 @@ async function getLocation(location) {
   };
 }
 
-async function getTimeZone(location) {
-  const today = new Date();
-
+async function setTimeZone(location) {
   // wait because getLocationData() contains async operations
   const locationData = await getLocationData(location);
-  const timeZone = today.toLocaleString("en-US", {
-    timeZone: locationData.tz_id,
-  });
+  console.log(locationData);
 
-  return timeZone;
+  currentTimeZone = locationData.tz_id;
 }
 
-async function getDate(location) {
-  // wait because getTimeZone() contains async operations
-  const timeZone = await getTimeZone(location);
-  const dateAndTime = timeZone.split(",");
-  const date = dateAndTime[0];
+function getDate() {
+  const today = new Date();
+  const dateAndTime = today.toLocaleString("en-US", {
+    timeZone: currentTimeZone,
+  });
+  const dateAndTimeArr = dateAndTime.split(",");
+  const date = dateAndTimeArr[0];
 
   return date;
 }
 
-async function getDayName(location) {
+function getDayName() {
   // wait because getDate() contains async operations
-  const locationDate = await getDate(location);
+  const locationDate = getDate();
   const date = new Date(locationDate);
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
 
   return dayName;
 }
 
-async function getTime(location) {
+function getTime() {
+  const today = new Date();
   // wait because getTimeZone() contains async operations
-  const timeZone = await getTimeZone(location);
-  const timeAndDate = timeZone.split(",");
-  const fullTime = timeAndDate[1].split(":");
+  const dateAndTime = today.toLocaleString("en-US", {
+    timeZone: currentTimeZone,
+  });
+
+  const dateAndTimeArr = dateAndTime.split(",");
+  const fullTime = dateAndTimeArr[1].split(":");
   const time = `${fullTime[0]}:${fullTime[1]}`;
   const pmOram = fullTime[2].slice(-2);
 
@@ -167,4 +170,5 @@ export {
   searchLocations,
   getCurrentLocation,
   setCurrentLocation,
+  setTimeZone,
 };
