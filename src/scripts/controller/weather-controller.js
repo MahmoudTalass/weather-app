@@ -13,6 +13,7 @@ import {
   getWeatherConditionIcon,
   searchLocations,
   getCurrentLocation,
+  setTimeZone,
 } from "../model/weather-model";
 import {
   displayDate,
@@ -34,13 +35,13 @@ import {
   toggleLoadingPage,
 } from "../view/weather-view";
 
-async function updateTime(location) {
-  const time = await getTime(location);
+function updateTime(location) {
+  const time = getTime(location);
   displayTime(time);
 }
 
-async function updateDate(location) {
-  const date = await getDate(location);
+function updateDate(location) {
+  const date = getDate(location);
   displayDate(date);
 }
 
@@ -140,9 +141,7 @@ async function startProgram() {
 
   const currentLocation = getCurrentLocation();
 
-  updateTime(currentLocation);
-  updateDate(currentLocation);
-  updateDay(currentLocation);
+  await setTimeZone(currentLocation);
 
   updateWeatherCondition(currentLocation);
   updateWeatherConditionIcon(currentLocation);
@@ -155,6 +154,10 @@ async function startProgram() {
   updateRegion(currentLocation);
   updateCountry(currentLocation);
 
+  updateTime();
+  updateDate();
+  updateDay();
+
   showTempScale();
 
   toggleLoadingPage();
@@ -162,11 +165,10 @@ async function startProgram() {
 
 function setTimeIntervals() {
   setInterval(() => {
-    const currentLocation = getCurrentLocation();
-    updateDate(currentLocation);
-    updateDay(currentLocation);
-    updateTime(currentLocation);
-  }, 60000);
+    updateDate();
+    updateDay();
+    updateTime();
+  }, 20000);
 
   setInterval(() => {
     const currentLocation = getCurrentLocation();
